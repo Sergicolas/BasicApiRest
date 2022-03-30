@@ -4,7 +4,6 @@ import com.scz.BasicApiRest.models.UserRegister;
 import com.scz.BasicApiRest.repository.UserRegisterRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,33 +26,34 @@ public class UserRegisterController {
     @Autowired
     UserRegisterRepository userRegisterRepository;
 
-    @GetMapping("/users")
+
     @ApiOperation(value="Return a list of Users")
+    @GetMapping("/users")
     public List<UserRegister> findAllUsers(){
         return userRegisterRepository.findAll();
     }
 
 
-    @GetMapping("/user/{id}")
     @ApiOperation(value="Return a single User")
+    @GetMapping("/user/{id}")
     public UserRegister findUserById(@PathVariable(value = "id") long id){
         return userRegisterRepository.findUserById(id);
     }
 
-    @PostMapping("/user")
     @ApiOperation(value="Register a new User")
+    @PostMapping("/user")
     public UserRegister saveUser(@RequestBody UserRegister userRegister){
         return userRegisterRepository.save(userRegister);
     }
 
-    @PutMapping("/user")
     @ApiOperation(value="Update an User")
+    @PutMapping("/user")
     public UserRegister updateUser(@RequestBody UserRegister userRegister){
         return userRegisterRepository.save(userRegister);
     }
 
-    @DeleteMapping("/user/{id}")
     @ApiOperation(value="Delete an User by id")
+    @DeleteMapping("/user/{id}")
     public void deleteUser(@PathVariable(value = "id") long id){
         userRegisterRepository.deleteById(id);
     }
